@@ -1,0 +1,166 @@
+@font-face {
+  font-family: 'Digital';
+  src: url('DS-DIGI.TTF')  format('truetype') /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Digital Bold';
+  src: url('DS-DIGIB.TTF')  format('truetype') /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Digital Italic';
+  src: url('DS-DIGII.TTF')  format('truetype') /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Digital Bold Italic';
+  src: url('DS-DIGIT.TTF')  format('truetype') /* Safari, Android, iOS */
+}
+
+
+* {
+  background: #C0C0C0;
+  box-sizing: border-box;
+}
+
+.red {
+  background-color: red;
+}
+
+#game {
+  background: #C0C0C0;
+  border-width: 4px;
+  border-top-color: #FEFEFE;
+  border-left-color: #FEFEFE;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  border-style: solid;
+  padding: 10px;
+  position: absolute;
+}
+
+#controls {
+  width: 100%;
+  height: 50px;
+  background: #C0C0C0;
+  border-width: 4px;
+  border-right-color: #FEFEFE;
+  border-bottom-color: #FEFEFE;
+  border-left-color: #808080;
+  border-top-color: #808080;
+  border-style: solid;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#field {
+  background: #C0C0C0;
+  border-spacing: 0;
+  border-width: 4px;
+  border-right-color: #FEFEFE;
+  border-bottom-color: #FEFEFE;
+  border-left-color: #808080;
+  border-top-color: #808080;
+  border-style: solid;
+}
+
+td {
+  background: #C0C0C0;
+  height: 40px;
+  width: 40px;
+  border-width: 4px;
+  border-top-color: #FEFEFE;
+  border-left-color: #FEFEFE;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  border-style: solid;
+
+  background-size: 28px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+td.open {
+  border-width: 1px;
+  border-top-color: #808080;
+  border-left-color: #808080;
+}
+
+td.one {
+  background-image: url('one.jpg');
+}
+td.two {
+  background-image: url('two.jpg');
+}
+td.three {
+  background-image: url('three.jpg');
+}
+td.four {
+  background-image: url('four.jpg');
+}
+td.five {
+  background-image: url('five.jpg');
+}
+td.six {
+  background-image: url('six.jpg');
+}
+td.seven {
+  background-image: url('seven.jpg');
+}
+td.eight {
+  background-image: url('eight.jpg');
+}
+td.flagged {
+  background-image: url('flag.jpg');
+  background-size: 20px;
+}
+td.mine {
+  background-image: url('mine.png');
+  background-size: 30px;
+}
+
+
+#face {
+  background-image: url('smile.jpg');
+  background-size: 100%;
+  background-position: center center;
+  background-color: #C0C0C0;
+  height: 40px;
+  width: 40px;
+  border-width: 4px;
+  border-top-color: #FEFEFE;
+  border-left-color: #FEFEFE;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  border-style: solid;
+  position: absolute;
+  left: 50%;
+  margin-left: -20px;
+  top: 50%;
+  margin-top: -20px;
+}
+#face.ooo {
+  background-image: url('ooo.jpg');
+}
+#face.dead {
+  background-image: url('dead.jpg');
+}
+#face.dude {
+  background-image: url('dude.jpg');
+}
+
+#time, #mine-count {
+  font-family: 'Digital Bold', sans-serif;
+  font-size: 43px;
+  color: red;
+  background-color: black;
+  display: inline;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 83px;
+}
+#time {
+  left: 0;
+}
+#mine-count {
+  right: 0;
+}
