@@ -1,18 +1,20 @@
+@charset "utf-8";
+
 @font-face {
   font-family: 'Digital';
-  src: url('DS-DIGI.TTF')  format('truetype') /* Safari, Android, iOS */
+  src: url('../fonts/DS-DIGI.TTF')  format('truetype') /* Safari, Android, iOS */
 }
 @font-face {
   font-family: 'Digital Bold';
-  src: url('DS-DIGIB.TTF')  format('truetype') /* Safari, Android, iOS */
+  src: url('../fonts/DS-DIGIB.TTF')  format('truetype') /* Safari, Android, iOS */
 }
 @font-face {
   font-family: 'Digital Italic';
-  src: url('DS-DIGII.TTF')  format('truetype') /* Safari, Android, iOS */
+  src: url('../fonts/DS-DIGII.TTF')  format('truetype') /* Safari, Android, iOS */
 }
 @font-face {
   font-family: 'Digital Bold Italic';
-  src: url('DS-DIGIT.TTF')  format('truetype') /* Safari, Android, iOS */
+  src: url('../fonts/DS-DIGIT.TTF')  format('truetype') /* Safari, Android, iOS */
 }
 
 
@@ -60,6 +62,7 @@
   border-left-color: #808080;
   border-top-color: #808080;
   border-style: solid;
+  border-collapse: separate;
 }
 
 td {
@@ -76,49 +79,50 @@ td {
   background-size: 28px;
   background-position: center center;
   background-repeat: no-repeat;
-}
-td.open {
-  border-width: 1px;
-  border-top-color: #808080;
-  border-left-color: #808080;
-}
 
-td.one {
-  background-image: url('one.jpg');
-}
-td.two {
-  background-image: url('two.jpg');
-}
-td.three {
-  background-image: url('three.jpg');
-}
-td.four {
-  background-image: url('four.jpg');
-}
-td.five {
-  background-image: url('five.jpg');
-}
-td.six {
-  background-image: url('six.jpg');
-}
-td.seven {
-  background-image: url('seven.jpg');
-}
-td.eight {
-  background-image: url('eight.jpg');
-}
-td.flagged {
-  background-image: url('flag.jpg');
-  background-size: 20px;
-}
-td.mine {
-  background-image: url('mine.png');
-  background-size: 30px;
+  &.open {
+    border-width: 1px;
+    border-top-color: #808080;
+    border-left-color: #808080;
+  }
+
+  &.one {
+    background-image: url('../images/one.jpg');
+  }
+  &.two {
+    background-image: url('../images/two.jpg');
+  }
+  &.three {
+    background-image: url('../images/three.jpg');
+  }
+  &.four {
+    background-image: url('../images/four.jpg');
+  }
+  &.five {
+    background-image: url('../images/five.jpg');
+  }
+  &.six {
+    background-image: url('../images/six.jpg');
+  }
+  &.seven {
+    background-image: url('../images/seven.jpg');
+  }
+  &.eight {
+    background-image: url('../images/eight.jpg');
+  }
+  &.flagged {
+    background-image: url('../images/flag.jpg');
+    background-size: 20px;
+  }
+  &.mine {
+    background-image: url('../images/mine.png');
+    background-size: 30px;
+  }
 }
 
 
 #face {
-  background-image: url('smile.jpg');
+  background-image: url('../images/smile.jpg');
   background-size: 100%;
   background-position: center center;
   background-color: #C0C0C0;
@@ -135,15 +139,16 @@ td.mine {
   margin-left: -20px;
   top: 50%;
   margin-top: -20px;
-}
-#face.ooo {
-  background-image: url('ooo.jpg');
-}
-#face.dead {
-  background-image: url('dead.jpg');
-}
-#face.dude {
-  background-image: url('dude.jpg');
+
+  &.ooo {
+    background-image: url('../images/ooo.jpg');
+  }
+  &.dead {
+    background-image: url('../images/dead.jpg');
+  }
+  &.dude {
+    background-image: url('../images/dude.jpg');
+  }
 }
 
 #time, #mine-count {

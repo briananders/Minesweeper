@@ -1,8 +1,4 @@
 (function(){
-  var tableSize = 10,
-      firstClick = true,
-      minesList = [],
-      openList = [];
 
   // Declaring class "Timer"
   var Timer = function() {
@@ -45,27 +41,12 @@
     };
   };
 
-  function Cell() {
+  var Cell = function() {
     this.value = null;
     this.open = false;
     this.flagged = false;
   };
 
-
-  var clock = new Timer(),
-      time = 0;
-
-  clock.Tick = function() {
-    time++;
-    var timeAsText = time.toString();
-    while(timeAsText.length < 3) {
-      timeAsText = "0" + timeAsText;
-    }
-    el = document.getElementById("time");
-    el.innerText = timeAsText;
-  };
-
-  var mineCount = Math.floor(tableSize * tableSize * 0.2);
   var updateMineCount = function(delta) {
     mineCount += delta;
 
@@ -73,12 +54,8 @@
     while(minesAsText.length < 3) {
       minesAsText = "0" + minesAsText;
     }
-    var el = document.getElementById("mine-count");
-    el.innerText = minesAsText;
-  }
-
-  updateMineCount(0);
-
+    mineCountEl.innerText = minesAsText;
+  };
 
   var clicked = function() {
     console.log('clicked');
@@ -95,7 +72,7 @@
     else {
       return revealOne(this);
     }
-  }
+  };
 
   var revealMines = function() {
 
@@ -103,7 +80,7 @@
 
     clock.Stop();
 
-    document.getElementById('face').classList.add('dead');
+    faceEl.classList.add('dead');
 
     minesList.forEach(function(mine){
       var el = document.querySelector("[data-row='" + mine.row + "'][data-column='" + mine.column + "']");
@@ -114,15 +91,13 @@
       }
     });
 
-    var tdList = document.getElementsByTagName('td');
-    for(var i = 0; i < tdList.length; i++){
-      var td = tdList.item(i);
+    tdList.forEach(function(td){
       td.removeEventListener('click', clicked, false);
       td.removeEventListener('contextmenu', right_clicked, false);
       td.removeEventListener('mousedown', faceOOO, false);
       td.removeEventListener('mouseup', faceSmile, false);
-    }
-  }
+    });
+  };
 
   var revealMany = function(self) {
     console.log('reveal many');
@@ -154,7 +129,7 @@
       if((col+1) < tableSize)
         revealOne(document.querySelector("[data-row='" + (row+1) + "'][data-column='" + (col+1) + "']"));
     }
-  }
+  };
 
   var revealOne = function(self) {
     console.log('reveal one');
@@ -190,22 +165,19 @@
     if(openList.length + minesList.length === tableSize * tableSize) {
       return winning();
     }
-  }
+  };
 
   var winning = function() {
     clock.Stop();
-    var el = document.getElementById('face');
-    el.classList.add('dude');
+    faceEl.classList.add('dude');
 
 
-    var tdList = document.getElementsByTagName('td');
-    for(var i = 0; i < tdList.length; i++){
-      var td = tdList.item(i);
+    tdList.forEach(function(td){
       td.removeEventListener('click', clicked, false);
       td.removeEventListener('contextmenu', right_clicked, false);
       td.removeEventListener('mousedown', faceOOO, false);
       td.removeEventListener('mouseup', faceSmile, false);
-    }
+    });
   };
 
   var numberToString = function(number) {
@@ -229,12 +201,12 @@
       default:
         return "zero";
     }
-  }
+  };
 
   var fillBoard = function(self) {
     fillMines(self);
     fillNumbers(self);
-  }
+  };
 
   var fillMines = function(self) {
     var mines = mineCount,
@@ -254,7 +226,7 @@
         });
       }
     }
-  }
+  };
 
   var fillNumbers = function(self) {
     for(var row = 0; row < tableSize; row++) {
@@ -298,7 +270,7 @@
         }
       }
     }
-  }
+  };
 
   var right_clicked = function() {
     console.log('double clicked');
@@ -318,46 +290,90 @@
       this.classList.add('flagged');
     }
     return false;
-  }
+  };
 
   var faceOOO = function() {
-    document.getElementById('face').classList.add('ooo');
+    faceEl.classList.add('ooo');
   };
 
   var faceSmile = function() {
-    document.getElementById('face').classList.remove('ooo');
+    faceEl.classList.remove('ooo');
+  };
+
+  var init = function() {
+    tableEl.id = "field";
+    controlsEl.id = "controls";
+    timeEl.id = "time";
+    mineCountEl.id = "mine-count";
+    faceEl.id = "face";
+
+    controlsEl.appendChild(timeEl);
+    controlsEl.appendChild(faceEl);
+    controlsEl.appendChild(mineCountEl);
+
+    gameEl.appendChild(controlsEl);
+    gameEl.appendChild(tableEl);
+
+    timeEl.innerText = "000";
+
+    clock.Tick = function() {
+      time++;
+      var timeAsText = time.toString();
+      while(timeAsText.length < 3) {
+        timeAsText = "0" + timeAsText;
+      }
+      timeEl.innerText = timeAsText;
+    };
+
+    updateMineCount(0);
+
+    for(var i = 0; i < tableSize; i++) {
+      cells[i] = new Array(tableSize);
+    }
+
+    for(var row = 0; row < tableSize; row++) {
+      var tr = document.createElement('tr');
+
+      for(var column = 0; column < tableSize; column++) {
+        var td = document.createElement('td');
+
+        td.dataset.row = row;
+        td.dataset.column = column;
+        cells[row][column] = new Cell();
+
+        td.addEventListener('click', clicked, false);
+        td.addEventListener('contextmenu', right_clicked, false);
+        td.addEventListener('mousedown', faceOOO, false);
+        td.addEventListener('mouseup', faceSmile, false);
+
+        tdList.push(td);
+        tr.appendChild(td);
+      }
+      tableEl.appendChild(tr);
+    }
+
+    faceEl.addEventListener('click', function(){
+      location.reload(false);
+    }, false);
   };
 
 
-  window.cells = new Array(tableSize);
-  for(var i = 0; i < tableSize; i++) {
-    window.cells[i] = new Array(tableSize);
-  }
+  var tableSize = 10,
+      firstClick = true,
+      mineCount = Math.floor(tableSize * tableSize * 0.2),
+      clock = new Timer(),
+      time = 0,
+      minesList = [],
+      openList = [],
+      flaggedList = [],
+      tdList = [],
+      cells = new Array(tableSize),
+      tableEl = document.createElement('table'),
+      controlsEl = document.createElement('div'),
+      timeEl = document.createElement('div'),
+      mineCountEl = document.createElement('div'),
+      faceEl = document.createElement('div'),
+      gameEl = document.getElementById('game');
 
-
-  var table = document.getElementById('field');
-  for(var row = 0; row < tableSize; row++) {
-    var tr = document.createElement('tr');
-
-    for(var column = 0; column < tableSize; column++) {
-      var td = document.createElement('td');
-
-      td.dataset.row = row;
-      td.dataset.column = column;
-      cells[row][column] = new Cell();
-
-      td.addEventListener('click', clicked, false);
-      td.addEventListener('contextmenu', right_clicked, false);
-      td.addEventListener('mousedown', faceOOO, false);
-      td.addEventListener('mouseup', faceSmile, false);
-
-      tr.appendChild(td);
-    }
-    table.appendChild(tr);
-  }
-
-  document.getElementById('face').addEventListener('click', function(){
-    location.reload(false);
-  }, false);
-
+  init();
 })();
